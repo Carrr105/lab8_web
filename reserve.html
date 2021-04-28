@@ -77,13 +77,38 @@
     </footer>
 
   </div>
+  
+
+  <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+  <script type="text/javascript">
+
+    $(".submit").on("click", function(event) {
+          event.preventDefault();
+          var newreserve = {
+            name: $("#reserve-name").val().trim(),
+            phone: $("#reserve-phone").val().trim(),
+            email: $("#reserve-email").val().trim(),
+            id: $("#reserve-unique-id").val().trim()
+          };
+
+          console.log(newreserve);
+    
+          $.post("/api/tables", newreserve, function(data) {
+            if (data){
+              alert("You are booked!");
+            }
+            else{
+              alert("Sorry... you are on the wait list");
+            }
+              $("#reserve-name").val("");
+              $("#reserve-phone").val("");
+              $("#reserve-email").val("");
+              $("#reserve-unique-id").val("");
+            });
+        });
+    
+    </script>
 
 </body>
 
 </html>
-
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
-<script type="text/javascript">
-
-
-</script>
